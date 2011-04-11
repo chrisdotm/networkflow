@@ -18,9 +18,15 @@ def main(expression):
     pass
 
 def parse(expr):
+    """
+    parse expr to objects
+    """
     pass
 
 def find_flow(nfi):
+    """
+    find best flow
+    """
     pass
 
 if __name__ == '__main__':
