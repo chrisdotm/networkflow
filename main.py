@@ -2,60 +2,15 @@
 from pyparsing import Word, alphas, alphanums, Literal, restOfLine, OneOrMore
 from pyparsing import empty, Suppress, replaceWith
 
-
-class Proposer(Object):
-    """
-    Represent a proposer
-    """
-    def __init__(self):
-        pass
-
-    def __str__(self):
-        pass
-
-class EdgeLabeledGraph(Object):
-    """
-    Represent an edge labeled graph
-    """
-    def __init__(self):
-        pass
-
-    def __str__(self):
-        pass
-
-class Adjacency(Object):
-    """
-    Represent an adjacency object
-    """
-    def __init__(self):
-        pass
-
-    def __str__(self):
-        pass
-
-class NetworkFlowInstance(Object):
-    """
-    Represent a network flow instance
-    """
-    def __init__(self):
-        pass
-
-    def __str__(self):
-        pass
-
-class Flow(Object):
-    """
-    Represent a flow object
-    """
-    def __init__(self):
-        pass
-
-    def __str__(self):
-        pass
+from proposer import Proposer
+from adjacency import Adjacency
+from edgelabeledgraph import EdgeLabeledGraph
+from networkflowinstance import NetworkFlowInstance
+from flow import Flow
 
 
 def main(expression):
-
+    pass
 
 if __name__ == '__main__':
     # later from stdin now from file
