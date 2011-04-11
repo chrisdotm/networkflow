@@ -10,6 +10,17 @@ from flow import Flow
 
 
 def main(expression):
+    """
+    parses expression and turns it into object which are useable in python
+    finds best network flow
+    returns representation of best network flow in our language
+    """
+    pass
+
+def parse(expr):
+    pass
+
+def find_flow(nfi):
     pass
 
 if __name__ == '__main__':
