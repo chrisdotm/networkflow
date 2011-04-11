@@ -25,7 +25,7 @@ class EdgeLabeledGraph(Object):
 
 class Adjacency(Object):
     """
-    Represent an adjanceny object
+    Represent an adjacency object
     """
     def __init__(self):
         pass
