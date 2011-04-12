@@ -6,8 +6,8 @@ class EdgeLabeledGraph:
     """
     Represent an edge labeled graph
     """
-    def __init__(self):
-        pass
+    def __init__(self, *args):
+        self.adjacencies = args
 
     def __str__(self):
-        pass
+        return ' '.join(self.adjacencies)
