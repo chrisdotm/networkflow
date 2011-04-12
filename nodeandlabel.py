@@ -11,4 +11,4 @@ class NodeAndLabel:
         self.label2 = label2
 
     def __str__(self):
-        return (str(self.node), self.label1, self.label2)
+        return "%s %s %s" % (str(self.node), self.label1, self.label2)
