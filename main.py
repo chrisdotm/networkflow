@@ -1,3 +1,4 @@
+# vim: set expandtab:ts=8:sw=4:softtabstop=4:smarttab
 #!/usr/bin/env python
 from pyparsing import Word, alphas, alphanums, Literal, restOfLine, OneOrMore
 from pyparsing import empty, Suppress, replaceWith
