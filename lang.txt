@@ -1,0 +1,8 @@
+FlowClaim
+"Karl.Lieberherr"
+instance
+"s" successors ( "t" c 20)
+"t" successors ()
+source "s"
+sink "t"
+quality 1.0
