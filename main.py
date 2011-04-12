@@ -1,13 +1,12 @@
 # vim: set expandtab:ts=8:sw=4:softtabstop=4:smarttab
 #!/usr/bin/env python
-from pyparsing import Word, alphas, alphanums, Literal, restOfLine, OneOrMore
-from pyparsing import empty, Suppress, replaceWith
-
 from proposer import Proposer
 from adjacency import Adjacency
 from edgelabeledgraph import EdgeLabeledGraph
 from networkflowinstance import NetworkFlowInstance
 from flow import Flow
+from node import None
+from nodeandlabeld import NodeAndLabel
 
 
 def main(expression):
