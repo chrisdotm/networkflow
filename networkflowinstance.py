@@ -5,8 +5,11 @@ class NetworkFlowInstance:
     """
     Represent a network flow instance
     """
-    def __init__(self):
-        pass
+    def __init__(self, elg, source, sink):
+        self.elg = elg
+        self.source = source
+        self.sink = sink
 
     def __str__(self):
-        pass
+        print "\"instance\" \n %s \n \"source\" \n %s \n \"sink\" \n %s" % (
+                self.elg, self.source, self.sink)

@@ -5,8 +5,18 @@ class Claim:
     """
     Represents a claim
     """
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, colleague, claim, nfi, quality):
+        self.colleague = colleague
+        self.claim_name = claim
+        self.nfi = nfi
+        self.quality = quality
+
 
     def __str__(self):
-        return self.name
+        return """
+        \"FlowClaim\"
+        %s
+        \"claim\" \"name\" %s
+        %s
+        %s
+        """ % (self.colleague, self.claim_name, self.nfi, self.quality)

@@ -5,10 +5,10 @@ class Proposer:
     """
     Represent a proposer
     """
-    def __init__(self):
-        pass
+    def __init__(self, name):
+        self.name = name
 
     def __str__(self):
-        pass
+        return "\"proposer\" %s" % self.name
 
 

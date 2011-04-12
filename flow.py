@@ -6,8 +6,8 @@ class Flow:
     """
     Represent a flow object
     """
-    def __init__(self):
-        pass
+    def __init__(self, elg):
+        self.elg = elg
 
     def __str__(self):
-        pass
+        return "\"solution\" \n %s" % self.elg

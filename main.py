@@ -16,7 +16,12 @@ def main(expression):
     finds best network flow
     returns representation of best network flow in our language
     """
-    print parse(' '.join(expression))
+    t = parse(' '.join(expression))
+    print t
+    return t
+
+def test():
+    return main(open('./lang.txt').readlines())
 
 def parse(expr):
     """
