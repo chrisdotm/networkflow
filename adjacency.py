@@ -6,8 +6,8 @@ class Adjacency:
     """
     Represent an adjacency object
     """
-    def __init__(self):
-        pass
+    def __init__(self, *args):
+        self.successors = args
 
     def __str__(self):
-        pass
+        return "successor ( %s )" % ' '.join(self.successor)
