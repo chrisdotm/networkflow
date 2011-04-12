@@ -8,3 +8,6 @@ class EdgeCapacity:
 
     def __str__(self):
         return "c %d" % self.capacity
+
+    def __repr__(self):
+        return "c %d" % self.capacity

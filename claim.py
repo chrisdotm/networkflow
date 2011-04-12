@@ -20,3 +20,12 @@ class Claim:
         %s
         %s
         """ % (self.colleague, self.claim_name, self.nfi, self.quality)
+
+    def __repr__(self):
+        return """
+        \"FlowClaim\"
+        %s
+        \"claim\" \"name\" %s
+        %s
+        %s
+        """ % (self.colleague, self.claim_name, self.nfi, self.quality)

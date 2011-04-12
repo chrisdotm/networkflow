@@ -8,3 +8,6 @@ class Quality:
 
     def __str__(self):
         return "\"quality\" %s" % self.quality
+
+    def __repr__(self):
+        return "\"quality\" %s" % self.quality

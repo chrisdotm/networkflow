@@ -10,6 +10,7 @@ from node import Node
 from nodeandlabel import NodeAndLabel
 from quality import Quality
 from claim import Claim
+from edgecapacity import EdgeCapacity
 
 
 caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -45,29 +46,29 @@ class Parser:
         """
 
         self.node = Group(QUOTE + Word(alphanums) + QUOTE).setParseAction(
-                lambda t: Node(t[0]))
+                lambda t: Node(t[0][0]))
         self.colleague = Group(Optional(Suppress("proposer")) + QUOTE +\
                 Word(caps+alphas+"."+caps+alphas) + QUOTE).setParseAction(
-                        lambda t: Proposer(t[0]))
+                        lambda t: Proposer(t[0][0]))
         self.nothing = Suppress(".")
 
         self.edgecapacity = Group(
                 Suppress("c") + Word(nums)
-                ).setParseAction(lambda t: EdgeCapacity(t[0]))
+                ).setParseAction(lambda t: EdgeCapacity(t[0][0]))
         self.nodeandlabel = Group(
                 self.node + Word(alphanums) + Optional(Word(alphanums))
                 ).setParseAction(lambda t: nodeandlabel(t))
         self.adjacency = Group(
                 self.node + Suppress("successors") + LPAREN + ZeroOrMore(self.nodeandlabel) + RPAREN
-                ).setParseAction(lambda t: Adjacency(t[0], t[1:]))
+                ).setParseAction(lambda t: Adjacency(t[0][0], t[0][1:]))
         self.quality = Group(
                 Suppress("quality") + Word(nums) + \
                 Optional(".") + Optional(Word(nums))
-                ).setParseAction(lambda t: Quality(t[0]))
+                ).setParseAction(lambda t: Quality(t[0][0]))
 
         self.edgelabeledgraph = Group(
                 ZeroOrMore(self.adjacency)
-                ).setParseAction(lambda t: EdgeLabeledGraph(t[0:]))
+                ).setParseAction(lambda t: EdgeLabeledGraph(t[0][0:]))
         self.networkflowinstance = Group(
                 Suppress("instance") + \
                 self.edgelabeledgraph + \
@@ -77,11 +78,11 @@ class Parser:
 
         self.flow = Group(
                 Suppress("\"solution\"") + self.edgelabeledgraph
-                ).setParseAction(lambda t: Flow(t[0]))
+                ).setParseAction(lambda t: Flow(t[0][0]))
 
         self.edgeflow = Group(
                 Suppress("\"f\"") + nums
-                ).setParseAction(lambda t: EdgeFlow(t[0]))
+                ).setParseAction(lambda t: EdgeFlow(t[0][0]))
 
         self.claim = Group(
                 Suppress("FlowClaim") + self.colleague + \
@@ -108,7 +109,6 @@ class Parser:
 ## TESTS:
 
 parser = Parser()
-#print dir(parser)
 test_string = """
 FlowClaim
 proposer "Karl.Lieberherr"
@@ -120,22 +120,26 @@ source "s"
 sink "t"
 quality 1.0
 """
-nfi_string = 'instance "s" successors ( "t" c 20) "t" successors () source "s" sink "t"'
+nfi_string = 'instance "s" successors ( "t" c 20) "t" successors () source "s" sink "t" quality 1.0'
 quality_string = 'quality 1.0'
 colleague_string = 'proposer "Karl.Lieberherr"'
 adjacency_string = '"99" successors ( )'
 #print adjacency.parseString(adjacency_string)
 #print colleague.parseString(colleague_string)
-#print quality.parseString(quality_string)
 #print networkflowinstance.parseString(nfi_string)
 #print Node(node.parseString(test_string)[0])
 #print NodeAndLabel(nodeandlabel.parseString(test_string)[0])
 #print claim.parseString(test_string)
 
 #print str(parser.node.parseString('"999"'))
+#print parser.colleague.parseString('proposer "Karl.Lieberherr"')
+#print parser.edgecapacity.parseString('c 99')
 #print parser.nodeandlabel.parseString('"t" c 20')
 #print parser.adjacency.parseString('"s" successors ( "t" c 20 )')
+#print parser.quality.parseString(quality_string)
+#print parser.edgelabeledgraph.parseString('"s" successors ( "t" c 20) "t" successors ()')
 #print parser.networkflowinstance.parseString(nfi_string)
+
 #print parser.claim.parseString(test_string)
 
 ##assert Node("s") == parser.node.parseString("s")

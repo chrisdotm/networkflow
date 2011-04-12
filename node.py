@@ -9,4 +9,7 @@ class Node:
         self.name = name
 
     def __str__(self):
-        return self.name
+        return "\"%s\"" % str(self.name)
+
+    def __repr__(self):
+        return "\"%s\"" % str(self.name)

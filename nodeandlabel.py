@@ -1,5 +1,6 @@
 # vim: set expandtab:ts=8:sw=4:softtabstop=4:smarttab
 #!/usr/bin/env python
+from node import Node
 
 class NodeAndLabel:
     """
@@ -11,4 +12,8 @@ class NodeAndLabel:
         self.label2 = label2
 
     def __str__(self):
-        return "%s %s %s" % (str(self.node), self.label1, self.label2)
+        return "%s %s %s" % (self.node, self.label1, self.label2)
+
+
+    def __repr__(self):
+        return "%s %s %s" % (self.node, self.label1, self.label2)
