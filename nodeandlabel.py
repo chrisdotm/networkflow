@@ -12,8 +12,11 @@ class NodeAndLabel:
         self.label2 = label2
 
     def __str__(self):
-        return "%s %s %s" % (self.node, self.label1, self.label2)
+        return "%s %s %s " % (self.node, self.label1, self.label2)
 
 
     def __repr__(self):
-        return "%s %s %s" % (self.node, self.label1, self.label2)
+        return str(self)
+
+    def __name__(self):
+        return "NodeAndLabel"

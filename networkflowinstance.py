@@ -1,6 +1,7 @@
 # vim: set expandtab:ts=8:sw=4:softtabstop=4:smarttab
 #!/usr/bin/env python
 from edgelabeledgraph import EdgeLabeledGraph
+from node import Node
 
 class NetworkFlowInstance:
     """
@@ -16,5 +17,7 @@ class NetworkFlowInstance:
                 self.elg, self.source, self.sink)
 
     def __repr__(self):
-        return "\"instance\" \n %s \n \"source\" \n %s \n \"sink\" \n %s" % (
-                self.elg, self.source, self.sink)
+        return str(self)
+
+    def __name__(self):
+        return "NetworkFlowInstance"

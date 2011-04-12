@@ -10,4 +10,7 @@ class Quality:
         return "\"quality\" %s" % self.quality
 
     def __repr__(self):
-        return "\"quality\" %s" % self.quality
+        return str(self)
+
+    def __name__(self):
+        return "Quality"

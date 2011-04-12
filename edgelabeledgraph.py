@@ -7,16 +7,16 @@ class EdgeLabeledGraph:
     Represent an edge labeled graph
     """
     def __init__(self, *args):
-        self.adjacencies = args
+        self.adjacencies = args[0]
 
     def __str__(self):
         adjacency_str = ''
         for adjacency in self.adjacencies:
-            adjacency_str += '%s ' % adjacency
+            adjacency_str += '%s \n' % adjacency
         return adjacency_str
 
     def __repr__(self):
-        adjacency_str = ''
-        for adjacency in self.adjacencies:
-            adjacency_str += '%s ' % adjacency
-        return adjacency_str
+        return str(self)
+
+    def __name__(self):
+        return "EdgeLabeledGraph"

@@ -28,7 +28,7 @@ def parse(expr):
     parse expr to objects
     """
     parser = Parser()
-    return parser.parse(expr)
+    return parser.parse(expr)[0]
 
 def find_flow(nfi):
     """

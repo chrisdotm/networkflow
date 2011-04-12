@@ -11,3 +11,9 @@ class EdgeFlow:
 
     def __str__(self):
         return "\"f\" %d" self.flow_int
+
+    def __repr__(self):
+        return str(self)
+
+    def __name__(self):
+        return "EdgeFlow"

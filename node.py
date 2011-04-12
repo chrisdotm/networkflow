@@ -12,4 +12,7 @@ class Node:
         return "\"%s\"" % str(self.name)
 
     def __repr__(self):
-        return "\"%s\"" % str(self.name)
+        return str(self)
+
+    def __name__(self):
+        return "Node"

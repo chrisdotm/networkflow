@@ -12,5 +12,7 @@ class Proposer:
         return "\"proposer\" %s" % self.name
 
     def __repr__(self):
-        return "\"proposer\" %s" % self.name
+        return str(self)
 
+    def __name__(self):
+        return "Proposer"

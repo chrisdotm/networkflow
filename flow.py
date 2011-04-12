@@ -11,3 +11,9 @@ class Flow:
 
     def __str__(self):
         return "\"solution\" \n %s" % self.elg
+
+    def __repr__(self):
+        return str(self)
+
+    def __name__(self):
+        return "Flow"

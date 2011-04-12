@@ -10,4 +10,7 @@ class EdgeCapacity:
         return "c %d" % self.capacity
 
     def __repr__(self):
-        return "c %d" % self.capacity
+        return str(self)
+
+    def __name__(self):
+        return "EdgeCapacity"
