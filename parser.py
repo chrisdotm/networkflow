@@ -56,9 +56,6 @@ class Parser:
         self.edgecapacity = Group(
                 Suppress("c") + Word(nums)
                 ).setParseAction(lambda t: EdgeCapacity(t[0][0]))
-        #self.nodeandlabel = Group(
-        #        self.node + Word(alphanums) + Optional(Word(alphanums))
-        #        ).setParseAction(lambda t: nodeandlabel(t))
         self.nodeandlabel = Group(self.node + self.edgecapacity
                 ).setParseAction(lambda t: nodeandlabel(t))
         self.adjacency = Group(
@@ -129,14 +126,14 @@ adjacency_string = '"99" successors ( )'
 #print NodeAndLabel(nodeandlabel.parseString(test_string)[0])
 #print claim.parseString(test_string)
 
-print str(parser.node.parseString('"999"'))
-print parser.colleague.parseString('proposer "Karl.Lieberherr"')
-print parser.edgecapacity.parseString('c 99')
-print parser.nodeandlabel.parseString('"t" c 20')
-print parser.adjacency.parseString('"s" successors ( "t" c 20 )')
-print parser.quality.parseString(quality_string)
-print parser.edgelabeledgraph.parseString('"s" successors ( "t" c 20) "t" successors ()')
-print parser.networkflowinstance.parseString(nfi_string)
+#print str(parser.node.parseString('"999"'))
+#print parser.colleague.parseString('proposer "Karl.Lieberherr"')
+#print parser.edgecapacity.parseString('c 99')
+#print parser.nodeandlabel.parseString('"t" c 20')
+#print parser.adjacency.parseString('"s" successors ( "t" c 20 )')
+#print parser.quality.parseString(quality_string)
+#print parser.edgelabeledgraph.parseString('"s" successors ( "t" c 20) "t" successors ()')
+#print parser.networkflowinstance.parseString(nfi_string)
 
 #print parser.claim.parseString(test_string)
 
