@@ -19,27 +19,28 @@ QUOTE = Suppress("\"")
 LPAREN = Suppress("(")
 RPAREN = Suppress(")")
 
+
 def makeNodeObject(n):
-    def nodeAction(s,l,t):
+
+    def nodeAction(s, l, t):
         try:
             return n(t[0].asList())
         except:
             return n(t)
     return nodeAction
 
+
 def nodeandlabel(n):
     n = n[0]
-    if len(n) >= 3:
-        return NodeAndLabel(n[0], n[1], n[2])
-    else:
-        return NodeAndLabel(n[0], n[1], None)
+    return NodeAndLabel(n[0], n[1])
+
 
 def claim(n):
     n = n[0]
     return Claim(n[0], n[1], n[2], n[3])
 
-class Parser:
 
+class Parser:
     def __init__(self):
         """
         why would you even do this?
@@ -48,19 +49,22 @@ class Parser:
         self.node = Group(QUOTE + Word(alphanums) + QUOTE).setParseAction(
                 lambda t: Node(t[0][0]))
         self.colleague = Group(Optional(Suppress("proposer")) + QUOTE +\
-                Word(caps+alphas+"."+caps+alphas) + QUOTE).setParseAction(
-                        lambda t: Proposer(t[0][0]))
+                               Word(caps + alphas + "." + caps + alphas) +\
+                               QUOTE).setParseAction(lambda t: Proposer(t[0][0]))
         self.nothing = Suppress(".")
 
         self.edgecapacity = Group(
                 Suppress("c") + Word(nums)
                 ).setParseAction(lambda t: EdgeCapacity(t[0][0]))
-        self.nodeandlabel = Group(
-                self.node + Word(alphanums) + Optional(Word(alphanums))
+        #self.nodeandlabel = Group(
+        #        self.node + Word(alphanums) + Optional(Word(alphanums))
+        #        ).setParseAction(lambda t: nodeandlabel(t))
+        self.nodeandlabel = Group(self.node + self.edgecapacity
                 ).setParseAction(lambda t: nodeandlabel(t))
         self.adjacency = Group(
-                self.node + Suppress("successors") + LPAREN + ZeroOrMore(self.nodeandlabel) + RPAREN
-                ).setParseAction(lambda t: Adjacency(t[0][0], t[0][1:]))
+                self.node + Suppress("successors") + LPAREN +\
+                        ZeroOrMore(self.nodeandlabel) +\
+                        RPAREN).setParseAction(lambda t: Adjacency(t[0][0], t[0][1:]))
         self.quality = Group(
                 Suppress("quality") + Word(nums) + \
                 Optional(".") + Optional(Word(nums))
@@ -101,13 +105,7 @@ class Parser:
         return self.claim.parseString(expr)
 
 
-
-
-
-
-
 ## TESTS:
-
 parser = Parser()
 test_string = """
 FlowClaim
@@ -131,14 +129,14 @@ adjacency_string = '"99" successors ( )'
 #print NodeAndLabel(nodeandlabel.parseString(test_string)[0])
 #print claim.parseString(test_string)
 
-#print str(parser.node.parseString('"999"'))
-#print parser.colleague.parseString('proposer "Karl.Lieberherr"')
-#print parser.edgecapacity.parseString('c 99')
-#print parser.nodeandlabel.parseString('"t" c 20')
-#print parser.adjacency.parseString('"s" successors ( "t" c 20 )')
-#print parser.quality.parseString(quality_string)
-#print parser.edgelabeledgraph.parseString('"s" successors ( "t" c 20) "t" successors ()')
-#print parser.networkflowinstance.parseString(nfi_string)
+print str(parser.node.parseString('"999"'))
+print parser.colleague.parseString('proposer "Karl.Lieberherr"')
+print parser.edgecapacity.parseString('c 99')
+print parser.nodeandlabel.parseString('"t" c 20')
+print parser.adjacency.parseString('"s" successors ( "t" c 20 )')
+print parser.quality.parseString(quality_string)
+print parser.edgelabeledgraph.parseString('"s" successors ( "t" c 20) "t" successors ()')
+print parser.networkflowinstance.parseString(nfi_string)
 
 #print parser.claim.parseString(test_string)
 

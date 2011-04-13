@@ -2,21 +2,32 @@
 #!/usr/bin/env python
 from node import Node
 
+
 class NodeAndLabel:
     """
     Represents a node and label
     """
-    def __init__(self, node, label1, label2):
+    def __init__(self, node, edgecap):
+        """
+        ; Node,String,String -> NodeAndLabel
+        """
         self.node = node
-        self.label1 = label1
-        self.label2 = label2
+        self.edgecap = edgecap
 
     def __str__(self):
-        return "%s %s %s " % (self.node, self.label1, self.label2)
-
+        """
+        ; -> String
+        """
+        return "%s %s " % (self.node, self.edgecap)
 
     def __repr__(self):
+        """
+        ; -> String
+        """
         return str(self)
 
     def __name__(self):
+        """
+        ; -> String
+        """
         return "NodeAndLabel"
