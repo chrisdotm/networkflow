@@ -8,29 +8,36 @@ from flow import Flow
 from node import Node
 from nodeandlabel import NodeAndLabel
 
-import solver
+import fulkerson_solver
 import sys
+
 
 ## opens the given claims file, parses it, and refutes or supports the claims 
 def playSciGame(file_path):
     claims_file = open(file_path)
-    lines = ' '.join(lang_file.readlines())
+    lines = ' '.join(claims_file.readlines())
     claims_file.close()
 
-    network = parse(lines)
-    elg = network.nfi.elg
+    claim = parseClaim(lines)
+    elg = claim.nfi.elg
 
-    solver = solver.FlowNetwork()
+    flowNetwork = fulkerson_solver.FlowNetwork()
     # create a list of node names
-    map(s.add_vertex, [adj.node.name for adj in elg.adjacencies])
-
+    map(flowNetwork.add_vertex, [adj.node.name for adj in elg.adjacencies])
+#    print flowNetwork.adj
     for adj in elg.adjacencies:
         for successor in adj.successors:
-            s.add_edge(adj.node.name,
+            flowNetwork.add_edge(adj.node.name,
                     successor.node.name,
                     successor.edgecap.capacity)
+    source = claim.nfi.source.name
+    sink   = claim.nfi.sink.name
+    if (flowNetwork.max_flow(source,sink ) == claim.quality):
+        print "Claim %s supported!" % claim.claim_name
+    else:
+        print "Claim refuted! \nCounter Proposal:" + flowNetwork.find_path(source, sink, [])  
 
-    print s.max_flow(network.nfi.source, network.nfi.sink)
+
 
 ## parseClaim : Strings 
 ## create a parser and returns the parsed lines
