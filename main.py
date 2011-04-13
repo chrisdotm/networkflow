@@ -8,20 +8,16 @@ from networkflowinstance import NetworkFlowInstance
 from flow import Flow
 from node import Node
 from nodeandlabel import NodeAndLabel
+import solver
 
 
-def main(expression):
+def main():
     """
     parses expression and turns it into object which are useable in python
     finds best network flow
     returns representation of best network flow in our language
     """
-    t = parse(' '.join(expression))
-    print t
-    return t
-
-def test():
-    return main(open('./lang.txt').readlines())
+    solve()
 
 def parse(expr):
     """
@@ -30,14 +26,40 @@ def parse(expr):
     parser = Parser()
     return parser.parse(expr)[0]
 
-def find_flow(nfi):
-    """
-    find best flow
-    """
-    pass
+def solve():
+    lang_file = open('./lang.txt')
+    lang = ' '.join(lang_file.readlines())
+    lang_file.close()
+
+    network = parse(lang)
+    elg = network.nfi.elg
+
+    s = solver.FlowNetwork()
+    # you have to loop twice here no way around it :(
+    map(s.add_vertex, [adj.node.name for adj in elg.adjacencies])
+
+
+    for adj in elg.adjacencies:
+        for successor in adj.successors:
+            s.add_edge(adj.node.name,
+                    successor.node.name,
+                    successor.edgecap.capacity)
+
+    print s.max_flow(network.nfi.source, network.nfi.sink)
+
+
+
+    #map(s.add_vertex,
+    #source = nfi.source
+    #sink = nfi.sink
+
+    #print network
+
+def test():
+    return main(open('./lang.txt').readlines())
+
 
 if __name__ == '__main__':
     # later from stdin now from file
-    input = open('./lang.txt')
-    main(input.readlines())
+    main()
 

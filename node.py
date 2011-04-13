@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # vim: set expandtab:ts=8:sw=4:softtabstop=4:smarttab
+import uuid
 
 
 class Node:
@@ -29,3 +30,6 @@ class Node:
         ; -> String
         """
         return "Node"
+
+    def __hash__(self):
+        return id(self)
