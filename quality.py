@@ -4,13 +4,25 @@
 class Quality:
 
     def __init__(self, quality):
+        """
+        ; int -> String
+        """
         self.quality = quality
 
     def __str__(self):
+        """
+        ; -> String
+        """
         return "\"quality\" %s" % self.quality
 
     def __repr__(self):
+        """
+        ; -> String
+        """
         return str(self)
 
     def __name__(self):
+        """
+        ; -> String
+        """
         return "Quality"
