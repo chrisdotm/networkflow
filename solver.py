@@ -46,13 +46,15 @@ class FlowNetwork(object):
                     return result
 
     def max_flow(self, source, sink):
+        # used is the list of paths used to compute the final flow
+        used = []
         path = self.find_path(source, sink, [])
         while path != None:
+            used.append(path)
             flow = min(res for edge,res in path)
             for edge,res in path:
                 self.flow[edge]       += flow
                 self.flow[edge.redge] -= flow
             path = self.find_path(source, sink, [])
-            print path
         return {"flow":sum(self.flow[edge] for edge in self.get_edges(source)),
-                "path": self.get_edges(source)}
+                "path": used}
