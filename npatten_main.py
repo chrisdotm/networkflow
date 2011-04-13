@@ -32,10 +32,12 @@ def playSciGame(file_path):
                     successor.edgecap.capacity)
     source = claim.nfi.source.name
     sink   = claim.nfi.sink.name
-    if (flowNetwork.max_flow(source,sink ) == claim.quality):
+    maxFlow = flowNetwork.max_flow(source,sink)
+    if (maxFlow  == claim.quality):
         print "Claim %s supported!" % claim.claim_name
     else:
-        print "Claim refuted! \nCounter Proposal:" + flowNetwork.find_path(source, sink, [])  
+        print "Claim refuted! \nCounter Proposal:"
+        print  maxFlow
 
 
 
