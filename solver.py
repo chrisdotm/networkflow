@@ -1,3 +1,9 @@
+"""
+http://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm
+this came from here I didnt write it
+i made some edits which i feel make it fit the assignment more
+"""
+
 class Edge:
     def __init__(self, u, v, w):
         self.source   = u
@@ -17,6 +23,8 @@ class FlowNetwork(object):
         return self.adj[v]
 
     def add_edge(self, u, v, w=0):
+        if u == v:
+            print u
         assert(u != v)
         edge  = Edge(u,v,w)
         redge = Edge(v,u,0)
@@ -45,4 +53,6 @@ class FlowNetwork(object):
                 self.flow[edge]       += flow
                 self.flow[edge.redge] -= flow
             path = self.find_path(source, sink, [])
-        return sum(self.flow[edge] for edge in self.get_edges(source))
+            print path
+        return {"flow":sum(self.flow[edge] for edge in self.get_edges(source)),
+                "path": self.get_edges(source)}
