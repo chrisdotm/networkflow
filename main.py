@@ -45,15 +45,9 @@ def solve():
                     successor.node.name,
                     successor.edgecap.capacity)
 
-    print s.max_flow(network.nfi.source, network.nfi.sink)
+    print s.max_flow(network.nfi.source.name,
+            network.nfi.sink.name)
 
-
-
-    #map(s.add_vertex,
-    #source = nfi.source
-    #sink = nfi.sink
-
-    #print network
 
 def test():
     return main(open('./lang.txt').readlines())

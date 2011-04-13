@@ -59,7 +59,7 @@ class Parser:
         self.nodeandlabel = Group(self.node + self.edgecapacity
                 ).setParseAction(lambda t: nodeandlabel(t))
         self.adjacency = Group(
-                self.node + Suppress("successors") + LPAREN +\
+                self.node + Suppress(Word(alphas)) + LPAREN +\
                         ZeroOrMore(self.nodeandlabel) +\
                         RPAREN).setParseAction(lambda t: Adjacency(t[0][0], t[0][1:]))
         self.quality = Group(
